@@ -1,0 +1,15 @@
+.List-grid {
+  display: grid;
+  grid-column-start: 2;
+  grid-column-end: 4;
+  text-align: center;
+}
+.List-content li {
+  text-decoration: none;
+  list-style-type: none;
+}
+
+.List-column {
+  display: inline-flex;
+  justify-content: space-evenly;
+}

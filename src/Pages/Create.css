@@ -1,0 +1,19 @@
+.Create-container {
+  text-align: center;
+}
+.Create-content {
+  justify-content: space-around;
+  display: flex;
+  column-count: 2;
+}
+.Create-field {
+    display: grid;
+    padding-bottom: 3rem;
+}
+.Create-field input {
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+    padding: 5px;
+    border-radius: 5px;
+    border: 0px;
+}
