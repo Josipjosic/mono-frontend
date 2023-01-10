@@ -1,7 +1,16 @@
 import React from "react";
+import { useEffect } from "react";
+import { modelService } from "../Common/ModelService";
 import "./List.css";
 
 function List() {
+  
+  useEffect(() => {
+    modelService.fetchCars();
+  }, []);
+
+  console.log(modelService.loadedCars)
+
   return (
     <div className="List-grid">
       <h3>List</h3>
