@@ -24,7 +24,7 @@ class ModelService {
   };
 
 
-
+  // POST method for sendning data to server
   createModel = async (vehicleMake, vehicleModel) => {
     return await fetch(
       "https://mono-frontend-45a65-default-rtdb.europe-west1.firebasedatabase.app/.json",
@@ -32,10 +32,15 @@ class ModelService {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ vehicleMake, vehicleModel }),
-      }
+      },
+      runInAction(() => {
+        this.fetchCars()
+        this.setLoadedCars(this.loadedCar);
+      })
     );
   };
 
+  // DELETE method for deleting data from server
   deleteHandler = async () => {
     await fetch(
       `https://mono-frontend-45a65-default-rtdb.europe-west1.firebasedatabase.app/.json`,
@@ -45,6 +50,7 @@ class ModelService {
     );
   };
 
+  // LOAD method to receive data from server
    fetchCars = async () => {
     const response = await fetch(
       "https://mono-frontend-45a65-default-rtdb.europe-west1.firebasedatabase.app/.json"
@@ -53,7 +59,7 @@ class ModelService {
       const loadedCar = [];
       for (const key in data) {
         loadedCar.push({
-          object: data[key]
+          items: data[key]
         });
         console.log(this.loadedCars)
       }
@@ -67,6 +73,9 @@ class ModelService {
 const modelService = new ModelService();
 
 export { modelService };
+
+
+// CreateStore for creating new list item
 
 class CreateStore {
   id;
@@ -126,12 +135,3 @@ const createStore = new CreateStore();
 
 export { createStore };
 
-class ListStore {
-
-
-  }
-
-
-const listStore = new ListStore();
-
-export { listStore };

@@ -7,8 +7,10 @@ import Create from "./Pages/Create";
 import Update from "./Pages/Update";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
+
   <React.StrictMode>
     <header className="App-header">
       <h1>Mono Frontend</h1>

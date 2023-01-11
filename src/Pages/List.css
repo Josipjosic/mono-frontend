@@ -1,0 +1,24 @@
+.List-grid {
+  display: grid;
+  grid-column-start: 1;
+  grid-column-end: 4;
+  text-align: center;
+}
+.List-content li {
+  text-decoration: none;
+  list-style-type: none;
+}
+
+.List-column {
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr 2fr;
+  grid-auto-rows: 80px;
+  justify-content: center;
+}
+
+.List-data {
+  border: 1px solid #666;
+  padding: 2px 10px 10px 10px;
+  font-size: 19px;
+  color: rgb(212, 0, 255);
+}

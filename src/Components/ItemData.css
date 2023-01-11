@@ -1,0 +1,20 @@
+.Item-content li {
+  text-decoration: none;
+  list-style-type: none;
+}
+.Item-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Item-column {
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr 2fr;
+  grid-auto-rows: 40px;
+  justify-content: center;
+}
+
+.Item-data {
+  border: 1px solid #666;
+}
