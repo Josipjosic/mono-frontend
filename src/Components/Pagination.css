@@ -1,0 +1,8 @@
+.Pagination-container{
+    margin-top: 30px;
+}
+.Pagination-list {
+    display: inline-flex;
+    text-decoration: none;
+    list-style-type: none;
+}

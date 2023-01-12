@@ -55,7 +55,7 @@ function Create() {
         onClick={(event) => {
           createStore.setId(Math.random());
           createStore.confirmHandler.call(this, event);
-          console.log(createStore.id)
+          event.target.reset();
         }}
       >
         Confirm

@@ -10,12 +10,14 @@ configure({ enforceActions: true });
 
 class ModelService {
   loadedCars = [];
+  selectedId = "";
 
   constructor() {
     makeAutoObservable(this, {
       loadedCars: observable,
       setLoadedCars: action,
       fetchCars: action,
+      deleteHandler: action,
     });
   }
   //set received data from fetch cars function
@@ -23,6 +25,10 @@ class ModelService {
     this.loadedCars = loadedCar;
   };
 
+  setSelectedId = (selectedId) => {
+    this.selectedId = selectedId;
+    console.log(this.selectedId)
+  }
 
   // POST method for sendning data to server
   createModel = async (vehicleMake, vehicleModel) => {
@@ -34,7 +40,7 @@ class ModelService {
         body: JSON.stringify({ vehicleMake, vehicleModel }),
       },
       runInAction(() => {
-        this.fetchCars()
+        this.fetchCars();
         this.setLoadedCars(this.loadedCar);
       })
     );
@@ -43,31 +49,34 @@ class ModelService {
   // DELETE method for deleting data from server
   deleteHandler = async () => {
     await fetch(
-      `https://mono-frontend-45a65-default-rtdb.europe-west1.firebasedatabase.app/.json`,
+      `https://mono-frontend-45a65-default-rtdb.europe-west1.firebasedatabase.app/${this.selectedId}.json`,
       {
         method: "DELETE",
       }
-    );
+      );
+      runInAction(() => {
+        this.fetchCars();
+      });
   };
 
   // LOAD method to receive data from server
-   fetchCars = async () => {
+  fetchCars = async () => {
     const response = await fetch(
       "https://mono-frontend-45a65-default-rtdb.europe-west1.firebasedatabase.app/.json"
     );
-     response.json().then((data) => {
+    response.json().then((data) => {
       const loadedCar = [];
       for (const key in data) {
         loadedCar.push({
-          items: data[key]
+          key: [key],
+          items: data[key],
         });
-        console.log(this.loadedCars)
       }
       runInAction(() => {
         this.setLoadedCars(loadedCar);
       });
     });
-  }
+  };
 }
 
 const modelService = new ModelService();
@@ -75,18 +84,19 @@ const modelService = new ModelService();
 export { modelService };
 
 
+
 // CreateStore for creating new list item
 
 class CreateStore {
   id;
   vehicleMake = {
-    id: (this.id),
+    id: this.id,
     makeName: (this.makeName = ""),
     makeAbrv: (this.makeAbrv = ""),
   };
   vehicleModel = {
-    id: (this.id),
-    modelId: (this.id),
+    id: this.id,
+    modelId: this.id,
     modelName: (this.modelName = ""),
     modelAbrv: (this.modelAbrv = ""),
   };
@@ -101,8 +111,8 @@ class CreateStore {
   setId = (id) => {
     this.vehicleMake.id = id;
     this.vehicleModel.id = id;
-    this.vehicleModel.modelId= id;
-  }
+    this.vehicleModel.modelId = id;
+  };
 
   // sets name of input name
   setMakeName = (makeName) => {
@@ -134,4 +144,3 @@ class CreateStore {
 const createStore = new CreateStore();
 
 export { createStore };
-
